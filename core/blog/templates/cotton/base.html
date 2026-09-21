@@ -4,11 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <script>
+  (() => {
+    try {
+      const stored = localStorage.getItem("themeMode");
+      if (stored ? stored === "dark" : matchMedia("(prefers-color-scheme: dark)").matches) {
+        document.documentElement.classList.add("dark");
+      }
+    } catch (_) {}
+  })();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+
+<style>
+  /* Default (Light mode): Show moon, hide sun */
+  .icon-sun { display: none !important; }
+  .icon-moon { display: inline-block !important; }
+
+  /* Dark mode: Show sun, hide moon */
+  html.dark .icon-sun { display: inline-block !important; }
+  html.dark .icon-moon { display: none !important; }
+</style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/basecoat-css@1.0.2/dist/basecoat.cdn.min.css" />
 
     <title>Document</title>
 </head>
-<body>
+<body class="dark">
     
 {{ slot }}
  <script src="https://cdn.jsdelivr.net/npm/basecoat-css@1.0.2/dist/js/all.min.js" defer></script>   
